@@ -80,7 +80,7 @@ class HrServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistPackageName(): string
     {
-        return 'seat-busa-hr';
+        return 'seat-busa-recruitment';
     }
 
     /**
