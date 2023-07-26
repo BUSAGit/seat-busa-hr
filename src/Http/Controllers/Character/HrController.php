@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Seat\Web\Http\DataTables\Scopes\CharacterScope;
 
+use Helious\SeatBusaHr\Models\HrNote;
 use Seat\Eveapi\Models\Character\CharacterInfo;
 
 class HrController extends Controller
@@ -18,7 +19,94 @@ class HrController extends Controller
      */
      public function notes(CharacterInfo $character, Request $request)
     {
-        return view('seat-busa-hr::eligibility.notes', compact('character'));
+        // get the main character id
+        $main_character_id = $character->refresh_token->user->main_character_id;
+        $main_character_name = $character->refresh_token->user->main_character->name;
+
+        // get all notes for the main character
+        $notes = HrNote::where('note_for', $main_character_id)->orderBy('id', 'desc')->get();
+        return view('seat-busa-hr::notes.index', compact('character', 'main_character_id', 'main_character_name', 'notes'));
+    }
+
+    public function create(Request $request, CharacterInfo $character)
+    {
+        if($request->isMethod('post'))
+        {
+            $data = $request->only([
+                'director_only',
+                'note',
+            ]);
+
+            $rules = [
+                'note' => ['required'],
+            ];
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors());
+            }
+
+            // add the main character id to the data array
+            $data['note_for'] = $character->refresh_token->user->main_character_id;
+            $data['created_by'] = \Auth::user()->id;
+
+            HrNote::create($data);
+
+            return redirect()->route('seat-busa-hr::notes', compact('character'))
+                ->with('success', 'User note created successfully.');
+        }
+
+        return view('seat-busa-hr::notes.create', compact('character'));
+    }
+
+    
+
+    public function edit(CharacterInfo $character, HrNote $note, Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            $data = $request->only([
+                'director_only',
+                'note',
+            ]);
+
+            $rules = [
+                'note' => ['required'],
+            ];
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors());
+            }
+
+            // add the main character id to the data array
+            $data['note_for'] = $character->refresh_token->user->main_character_id;
+            $data['created_by'] = \Auth::user()->id;
+            $data['director_only'] = $request->has('director_only') ? true : false;
+
+            $note->update($data);
+            
+            $main_character_id = $character->refresh_token->user->main_character_id;
+            $main_character_name = $character->refresh_token->user->main_character->name;
+
+            
+            $notes = HrNote::where('note_for', $main_character_id)->orderBy('id', 'desc')->get();
+            return view('seat-busa-hr::notes.index', compact('main_character_id', 'main_character_name', 'character', 'notes'))->with('success', 'User note has been updated successfully.');
+
+        }
+        
+        return view('seat-busa-hr::notes.edit', compact('note', 'character'));
+    }
+
+    
+    public function delete(CharacterInfo $character, HrNote $note)
+    {
+        // is the user allowed to delete this note?
+        if(!\Auth::user()->can('seat-busa-hr.director_notes'))
+            return redirect()->back()->with('error', 'You are not allowed to delete this note.');
+
+        $note->delete();
+
+        return redirect()->route('seat-busa-hr::notes', ['character' => $character])->with('success', 'User note has been removed successfully.');
     }
 
 

@@ -11,14 +11,18 @@
             <div class="card-body">
                     {{ csrf_field() }}
 
-                    <div class="form-group">
-                        <label for="severity">Severity</label>
-                        <select name="severity" id="severity" class="form-control"  required>
-                            <option value="info">Info</option>
-                            <option value="warning">Warning</option>
-                            <option value="danger">Danger</option>
-                        </select>
+                    @if(Auth()->user()->can('seat-busa-hr.director_notes'))
+                    <div class="form-check">
+                        <input class="form-check-input" name="director_only" id="director_only" type="checkbox" value="1">
+                        <label class="form-check-label" for="directory_only">
+                            Director Only?
+                            <small class="text-muted">
+                                (Only visible to directors)
+                            </small>
+                        </label>
                     </div>
+                    <br>
+                    @endif
 
                     <div class="form-group">
                         <label for="note">Note</label>

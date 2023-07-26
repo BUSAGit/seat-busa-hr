@@ -26,7 +26,7 @@ Route::group([
         ]);
 
         Route::match(['get', 'post'], '/edit/{note}', [
-            'uses' => 'HrController@create',
+            'uses' => 'HrController@edit',
             'as' => 'seat-busa-hr::notes.edit',
         ]);
 
