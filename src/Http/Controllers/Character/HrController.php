@@ -18,8 +18,7 @@ class HrController extends Controller
      */
      public function notes(CharacterInfo $character, Request $request)
     {
-        dd($character);
-        return view('seat-busa-hr::eligibility.notes');
+        return view('seat-busa-hr::eligibility.notes', compact('character'));
     }
 
 
