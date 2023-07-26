@@ -17,16 +17,11 @@ class SeatBusaHrInitialDeployment extends Migration
             $table->increments('id');
             $table->boolean('director_only')->default(false);
             $table->longText('note');
-            $table->bigInteger('created_by')->unsigned();
-            $table->integer('note_for')->unsigned();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('note_for');
 
-            $table->foreign('note_for')
-                ->references('main_character_id')
-                ->on('users');
-
-            $table->foreign('created_by')
-                ->references('id')
-                ->on('users');
+            $table->foreign('note_for')->references('main_character_id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users');
                 
             $table->timestamps();
         });
