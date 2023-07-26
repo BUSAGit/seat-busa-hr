@@ -25,17 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($seat_hr_user->notes as $note)
-                        <tr class="table-{{ $note->severity }}">
-                            <td>{{ $note->id }}</td>
-                            <td>{{ $note->severity }}</td>
-                            <td style="white-space: pre-wrap;">{{ $note->note }}</td>
-                            <td>{{ $note->creator->name }}</td>
-                            <td>{{ $note->created_at }}</td>
-                            <td>{{ $note->updated_at }}</td>
-                            <td>@include('seat-hr::user.note.partials.actions')</td>
-                        </tr>
-                    @endforeach
+                    
                 </tbody>
             </table>
         </div>
