@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Seat\Web\Http\DataTables\Scopes\CharacterScope;
 
+use Seat\Eveapi\Models\Character\CharacterInfo;
+
 class HrController extends Controller
 {
     /**
