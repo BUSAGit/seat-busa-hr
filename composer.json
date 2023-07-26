@@ -1,9 +1,9 @@
 {
-    "name": "helious/seat-busa-recruitment",
+    "name": "helious/seat-busa-hr",
     "type": "library",
     "keywords": [
         "helious",
-        "seat-busa-recruitment"
+        "seat-busa-hr"
     ],
     "authors": [
         {
@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Helious\\SeatBusaRecruitment\\": "src"
+            "Helious\\SeatBusaHr\\": "src"
         }
     },
     "require": {
@@ -24,7 +24,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Helious\\SeatBusaRecruitment\\RecruitmentServiceProvider"
+                "Helious\\SeatBusaHr\\HrServiceProvider"
             ]
         }
     }
