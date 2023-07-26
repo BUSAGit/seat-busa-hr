@@ -1,12 +1,12 @@
-@extends('seat-busa-hr::user.layouts.view', [ 'viewname' => 'seat-busa-hr::notes' ])
+@extends('web::character.layouts.view', [ 'viewname' => 'seat-busa-hr::notes' ])
 
-@section('page_header', trans('seat-hr::user.title') . ': ' . trans('seat-hr::user.notes.title'))
+@section('page_header', trans_choice('web::seat.character', 1) . ' Notes')
 
-@section('profile_content')
+@section('character_content')
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ trans('seat-hr::user.notes.title') }}</h3>
-            <a href="{{ route('seat-hr.profile.note.create', ['character' => $character]) }}" class="btn btn-sm btn-primary float-right">
+            <a href="" class="btn btn-sm btn-primary float-right">
                 <i class="fas fa-plus"></i>
                 Add
             </a>
