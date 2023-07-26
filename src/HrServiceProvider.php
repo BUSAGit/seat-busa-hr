@@ -33,9 +33,7 @@ class HrServiceProvider extends AbstractSeatPlugin
         $this->loadViewsFrom(__DIR__.'/resources/views', 'seat-busa-hr');
 
         // Publish migrations
-        $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
     }
 

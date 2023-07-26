@@ -5,8 +5,8 @@
 @section('character_content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">{{ trans('seat-hr::user.notes.title') }}</h3>
-            <a href="" class="btn btn-sm btn-primary float-right">
+            <h3 class="card-title">Notes</h3>
+            <a href="{{ route('seat-busa-hr::notes.create', ['character' => $character]) }}" class="btn btn-sm btn-primary float-right">
                 <i class="fas fa-plus"></i>
                 Add
             </a>
