@@ -13,7 +13,7 @@ Route::group([
 {
 
     Route::get('/{character}/notes', [
-        'uses' => 'HRController@notes',
+        'uses' => 'HrController@notes',
         'as' => 'seat-busa-hr::notes',
         'middleware' => 'character',
     ]);
