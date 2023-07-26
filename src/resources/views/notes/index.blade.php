@@ -3,10 +3,19 @@
 @section('page_header', trans_choice('web::seat.character', 1) . ' Notes')
 
 @section('character_content')
-    <h4>Notes For {{$main_character_name}}</h4>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title mb-4">Registered Services For {{$main_character_name}}</h3>
+            <div class="card-text">
+                Has Teamspeak Linked: {!! $has_linked_teamspeak ? '<i class="fas fa-check-circle text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>' !!}
+                <br>
+                Has Discord Linked: {!!$has_linked_discord ? '<i class="fas fa-check-circle text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>' !!}
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Notes</h3>
+            <h3 class="card-title">Notes For {{$main_character_name}}</h3>
             <a href="{{ route('seat-busa-hr::notes.create', ['character' => $character]) }}" class="btn btn-sm btn-primary float-right">
                 <i class="fas fa-plus"></i>
                 Add

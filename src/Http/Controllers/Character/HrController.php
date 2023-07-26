@@ -10,6 +10,8 @@ use Seat\Web\Http\DataTables\Scopes\CharacterScope;
 use Helious\SeatBusaHr\Models\HrNote;
 use Seat\Eveapi\Models\Character\CharacterInfo;
 
+use Warlof\Seat\Connector\Models\User;
+
 class HrController extends Controller
 {
     /**
@@ -23,9 +25,24 @@ class HrController extends Controller
         $main_character_id = $character->refresh_token->user->main_character_id;
         $main_character_name = $character->refresh_token->user->main_character->name;
 
+        // get the user id for the main character
+        $main_character_user_id = $character->refresh_token->user->id;
+        
+        $identities = User::where('user_id', $main_character_user_id)->get();
+        $has_linked_teamspeak = false;
+        $has_linked_discord = false;
+
+        foreach($identities as $identity)
+        {
+            if($identity->connector_type === 'teamspeak')
+                $has_linked_teamspeak = true;
+            if($identity->connector_type === 'discord')
+                $has_linked_discord = true;
+        }
+
         // get all notes for the main character
         $notes = HrNote::where('note_for', $main_character_id)->orderBy('id', 'desc')->get();
-        return view('seat-busa-hr::notes.index', compact('character', 'main_character_id', 'main_character_name', 'notes'));
+        return view('seat-busa-hr::notes.index', compact('character', 'main_character_id', 'main_character_name', 'notes', 'has_linked_teamspeak', 'has_linked_discord'));
     }
 
     public function create(Request $request, CharacterInfo $character)
