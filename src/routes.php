@@ -7,7 +7,6 @@ Route::group([
     'middleware' => [
         'web',
         'auth',
-        'can:seat-busa-hr.access',
     ],
 ], function()
 {
@@ -15,7 +14,7 @@ Route::group([
     Route::get('/{character}/notes', [
         'uses' => 'HrController@notes',
         'as' => 'seat-busa-hr::notes',
-        'middleware' => 'character',
+        'middleware' => 'can:seat-busa-hr.access,character',
     ]);
 
 });
