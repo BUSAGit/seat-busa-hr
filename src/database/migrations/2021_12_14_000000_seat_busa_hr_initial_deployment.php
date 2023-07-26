@@ -17,12 +17,17 @@ class SeatHrInitialDeployment extends Migration
             $table->increments('id');
             $table->boolean('director_only')->default(false);
             $table->longText('note');
-            $table->integer('character_id')->unsigned();
+            $table->bigInteger('created_by')->unsigned();
+            $table->integer('note_for')->unsigned();
 
-            $table->foreign('character_id')
+            $table->foreign('note_for')
                 ->references('character_id')
-                ->on('seat_characters')
-                ->onDelete('cascade');
+                ->on('users');
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
+                
             $table->timestamps();
         });
     }
