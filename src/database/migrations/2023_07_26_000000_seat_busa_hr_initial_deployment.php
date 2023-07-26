@@ -21,7 +21,7 @@ class SeatBusaHrInitialDeployment extends Migration
             $table->integer('note_for')->unsigned();
 
             $table->foreign('note_for')
-                ->references('character_id')
+                ->references('main_character_id')
                 ->on('users');
 
             $table->foreign('created_by')
