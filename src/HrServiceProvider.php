@@ -15,7 +15,9 @@ class HrServiceProvider extends AbstractSeatPlugin
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/Config/seat-busa-hr.php', 'seat-busa-hr');
         $this->mergeConfigFrom(__DIR__ . '/Config/package.character.menu.php', 'package.character.menu');
+        $this->registerPermissions(__DIR__ . '/Config/seat-busa-hr.permissions.php', 'seat-busa-hr');
     }
 
     /**
