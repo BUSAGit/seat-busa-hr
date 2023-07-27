@@ -123,7 +123,7 @@ class HrController extends Controller
 
         $note->delete();
 
-        return redirect()->route('seat-busa-hr::notes.index', ['character' => $character])->with('success', 'User note has been removed successfully.');
+        return redirect()->route('seat-busa-hr::notes.index', ['character' => $character]);
     }
 
 
