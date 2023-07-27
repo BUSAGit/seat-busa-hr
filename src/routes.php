@@ -17,7 +17,7 @@ Route::group([
     ], function (){
         Route::get('/', [
             'uses' => 'HrController@notes',
-            'as' => 'seat-busa-hr::notes',
+            'as' => 'seat-busa-hr::notes.index',
         ]);
 
         Route::match(['get', 'post'], '/create', [

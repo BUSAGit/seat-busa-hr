@@ -19,7 +19,7 @@ class HrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function notes(CharacterInfo $character, Request $request)
+     public function index(CharacterInfo $character, Request $request)
     {
         // get the main character id
         $main_character_id = $character->refresh_token->user->main_character_id;
@@ -123,7 +123,7 @@ class HrController extends Controller
 
         $note->delete();
 
-        return redirect()->route('seat-busa-hr::notes', ['character' => $character])->with('success', 'User note has been removed successfully.');
+        return redirect()->route('seat-busa-hr::notes.index', ['character' => $character])->with('success', 'User note has been removed successfully.');
     }
 
 
