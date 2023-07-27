@@ -69,7 +69,7 @@ class HrController extends Controller
 
             HrNote::create($data);
 
-            return redirect()->route('seat-busa-hr::notes', compact('character'))
+            return redirect()->route('seat-busa-hr::notes.index', compact('character'))
                 ->with('success', 'User note created successfully.');
         }
 
@@ -107,11 +107,11 @@ class HrController extends Controller
 
             
             $notes = HrNote::where('note_for', $main_character_id)->orderBy('id', 'desc')->get();
-            return view('seat-busa-hr::notes.index', compact('main_character_id', 'main_character_name', 'character', 'notes'))->with('success', 'User note has been updated successfully.');
+            return redirect()->route('seat-busa-hr::notes.index', ['character' => $character])->with('success', 'User note has been updated successfully.');
 
         }
         
-        return view('seat-busa-hr::notes.edit', compact('note', 'character'));
+        return view('seat-busa-hr::notes.edit', ['character' => $character, 'note' => $note])->with('error', 'Something went wrong.');
     }
 
     
@@ -123,7 +123,7 @@ class HrController extends Controller
 
         $note->delete();
 
-        return redirect()->route('seat-busa-hr::notes.index', ['character' => $character]);
+        return redirect()->route('seat-busa-hr::notes.index', ['character' => $character])->with('success', 'User note has been removed successfully.');
     }
 
 
