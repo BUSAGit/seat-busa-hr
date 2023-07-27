@@ -16,8 +16,8 @@ Route::group([
         'middleware' => 'can:seat-busa-hr.access',
     ], function (){
         Route::get('/', [
-            'uses' => 'HrController@notes',
-            'as' => 'seat-busa-hr::notes.index',
+            'uses' => 'HrController@index',
+            'as' => 'seat-busa-hr::notes',
         ]);
 
         Route::match(['get', 'post'], '/create', [
