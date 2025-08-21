@@ -1,5 +1,5 @@
 {
-    "name": "helious/seat-busa-hr",
+    "name": "busa-git/seat-busa-hr",
     "type": "library",
     "keywords": [
         "helious",
@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Helious\\SeatBusaHr\\": "src/"
+            "busa-git\\SeatBusaHr\\": "src/"
         }
     },
     "require": {
@@ -27,7 +27,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Helious\\SeatBusaHr\\HrServiceProvider"
+                "busa-git\\SeatBusaHr\\HrServiceProvider"
             ]
         }
     }
